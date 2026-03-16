@@ -2,9 +2,7 @@ name: Check time zone
 
 on:
   schedule:
-    # 12:17 UTC = 8:17 PM MYT (UTC+8)
-    # Using '17' instead of '0' avoids the heavy peak-hour delay you see at 9pm.
-    - cron: '17 12 * * *'
+    - cron: '18 2 * * *'
   workflow_dispatch: # Allows you to run it manually for testing
 
 jobs:
@@ -18,7 +16,7 @@ jobs:
       - name: Audit Runner Timezone & Delay
         run: |
           echo "--- Timezone Audit ---"
-          echo "Expected Trigger (UTC): 12:17"
+          echo "Expected Trigger (UTC): 2:18"
           echo "Actual System Time (UTC): $(date -u +'%H:%M')"
           echo "Actual Malaysia Time (MYT): $(TZ='Asia/Kuala_Lumpur' date +'%H:%M')"
           echo "-----------------------"
