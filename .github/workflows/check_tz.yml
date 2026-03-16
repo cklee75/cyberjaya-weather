@@ -1,0 +1,24 @@
+name: Daily Weather Push 🌦️
+
+on:
+  schedule:
+    # 12:17 UTC = 8:17 PM MYT (UTC+8)
+    # Using '17' instead of '0' avoids the heavy peak-hour delay you see at 9pm.
+    # - cron: '17 12 * * *'
+  workflow_dispatch: # Allows you to run it manually for testing
+
+jobs:
+  weather_update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Audit Runner Timezone & Delay
+        run: |
+          echo "--- Timezone Audit ---"
+          echo "Expected Trigger (UTC): 12:17"
+          echo "Actual System Time (UTC): $(date -u +'%H:%M')"
+          echo "Actual Malaysia Time (MYT): $(TZ='Asia/Kuala_Lumpur' date +'%H:%M')"
+          echo "-----------------------"
